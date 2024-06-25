@@ -51,6 +51,7 @@ public class Exporters {
         try {
             var recipes = new Recipes();
 
+            recipes.putAllRecipeGroups(ShapedCraftingExporter.export());
             recipes.putAllRecipeGroups(GregTechExporter.export());
 
             exportJson(recipes);

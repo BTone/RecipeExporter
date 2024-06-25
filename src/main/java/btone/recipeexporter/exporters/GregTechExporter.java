@@ -13,6 +13,7 @@ import net.minecraftforge.fluids.FluidStack;
 import btone.recipeexporter.RecipeExporter;
 import btone.recipeexporter.schema.*;
 import codechicken.nei.recipe.GuiCraftingRecipe;
+import codechicken.nei.recipe.GuiRecipeTab;
 import cpw.mods.fml.common.registry.GameRegistry;
 import gregtech.nei.GT_NEI_DefaultHandler;
 import gregtech.nei.GT_NEI_DefaultHandler.CachedDefaultRecipe;
@@ -90,6 +91,13 @@ public class GregTechExporter {
 
     static private RecipeGroup createRecipeGroup(GT_NEI_DefaultHandler src) {
         var recipeGroup = new RecipeGroup();
+
+        // Get catalyst from handler info
+        var handlerInfo = GuiRecipeTab.getHandlerInfo(src);
+        var infoItemStack = handlerInfo.getItemStack();
+        if (infoItemStack != null) {
+            recipeGroup.setCatalystName(infoItemStack.getDisplayName());
+        }
 
         // Populate recipes in handler
         src.arecipes.clear();
